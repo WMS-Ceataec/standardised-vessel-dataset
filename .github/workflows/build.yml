@@ -20,8 +20,8 @@ jobs:
       PYTHON_SCRIPTS_PATH: ".github/python_scripts"
       PR_TITLE_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\(\d+\))(!)?\:[\s](.+)'
       BRANCH_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\/)(\d+)(-)([a-zA-Z0-9_-]+$)'
-      # DOTNET_VERSION: '8.0.x'
-      # SOLUTION_FILE_PATH: ''
+      DOTNET_VERSION: '8.0.x'
+      SOLUTION_FILE_PATH: 'Ceataec.StandardizedVesselDataset.sln'
     steps:
     - uses: actions/checkout@v4
       with:
