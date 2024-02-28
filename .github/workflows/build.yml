@@ -20,8 +20,8 @@ jobs:
       PYTHON_SCRIPTS_PATH: ".github/python_scripts"
       PR_TITLE_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\(\d+\))(!)?\:[\s](.+)'
       BRANCH_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\/)(\d+)(-)([a-zA-Z0-9_-]+$)'
-      # DOTNET_VERSION: '8.0.x'
-      # SOLUTION_FILE_PATH: ''
+      DOTNET_VERSION: '8.0.x'
+      SOLUTION_FILE_PATH: 'Ceataec.StandardizedVesselDataset.sln'
     steps:
     - uses: actions/checkout@v4
       with:
@@ -55,44 +55,45 @@ jobs:
 
     #--------------BUILD--------------
 
-    # - name: Setup .NET
-    #   uses: actions/setup-dotnet@v1
-    #   with:
-    #     dotnet-version: ${{ env.DOTNET_VERSION }}
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
 
-    # - name: Restore dependencies
-    #   run: dotnet restore ${{ env.SOLUTION_FILE_PATH }}
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.SOLUTION_FILE_PATH }}
 
     #--------------TESTS--------------
 
-    # - name: Build and run tests with code coverage
-    #   run: |
-    #     dotnet build ${{ env.SOLUTION_FILE_PATH }} --no-restore
-    #     dotnet test ${{ env.SOLUTION_FILE_PATH }} --no-restore --no-build --verbosity normal --collect:"XPlat Code Coverage"
+    - name: Build and run tests with code coverage
+      run: |
+        dotnet build ${{ env.SOLUTION_FILE_PATH }} --no-restore
+        dotnet test ${{ env.SOLUTION_FILE_PATH }} --no-restore --no-build --verbosity normal --collect:"XPlat Code Coverage"
     
     #--------------REPORT GENERATION--------------
 
-    # - name: ReportGenerator
-    #   uses: danielpalme/ReportGenerator-GitHub-Action@5.2.1
-    #   with:
-    #     reports: '**/coverage.cobertura.xml'  # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
-    #     targetdir: 'coverage'                 # REQUIRED # The directory where the generated report should be saved.
-    #     reporttypes: 'HtmlInline;Cobertura'   # The output formats and scope
-    #     toolpath: 'reportgeneratortool' 
+    - name: ReportGenerator
+      uses: danielpalme/ReportGenerator-GitHub-Action@5.2.1
+      with:
+        reports: '**/coverage.cobertura.xml'  # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        targetdir: 'coverage'                 # REQUIRED # The directory where the generated report should be saved.
+        reporttypes: 'HtmlInline;Cobertura'   # The output formats and scope
+        toolpath: 'reportgeneratortool' 
 
-    # - name: Upload coverage results
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: code-coverage-report
-    #     path: coverage/*
+    - name: Upload coverage results
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage-report
+        path: coverage/*
 
-    # - uses: 5monkeys/cobertura-action@master
-    #   if: ${{ github.event_name == 'pull_request' }}
-    #   with:
-    #     path: coverage/*.xml
-    #     minimum_coverage: 80
+    - uses: 5monkeys/cobertura-action@master
+      if: ${{ github.event_name == 'pull_request' }}
+      with:
+        path: coverage/*.xml
+        minimum_coverage: 80
 
-    # - name: Push git tags
-    #   if: github.ref == 'refs/heads/main'
-    #   run: |
-    #     git push --tags || exit 4
+    #--------------GIT TAG PUSH--------------
+    - name: Push git tags
+      if: github.ref == 'refs/heads/main'
+      run: |
+        git push --tags || exit 4
