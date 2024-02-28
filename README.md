@@ -143,4 +143,4 @@ The foundational design of the Standardised Vessel DataSet (SVD) model was craft
 
 ## Contact
 
-For any questions or feedback, feel free to reach out to us at [Slack](https://ceataeccommunity.slack.com/archives/C06KV6336UF).
+For any questions or feedback, feel free to join us at [Slack - Ceataec Community](https://join.slack.com/t/ceataeccommunity/shared_invite/zt-2d9ofsmqd-z0Eg8110zM91kmdUCsM31Q).
