@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<VesselReportData>
+    <VesselImo>9874512</VesselImo>
+    <VesselName>Ocean King</VesselName>
+    <ReportDate>2024-02-20T12:00:00Z</ReportDate>
+    <DeparturePort>BCN</DeparturePort>
+    <DepartureTime>2024-02-20T12:30:00Z</DepartureTime>
+    <DestinationPort>LIS</DestinationPort>
+    <DistanceToDestinationPortKM>1000</DistanceToDestinationPortKM>
+</VesselReportData>
