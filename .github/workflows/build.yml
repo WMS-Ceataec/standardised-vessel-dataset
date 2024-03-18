@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
   pull_request:
     types: [opened, reopened,synchronize, edited]
-  workflow_call:
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -21,7 +21,7 @@ jobs:
       PR_TITLE_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\(\d+\))(!)?\:[\s](.+)'
       BRANCH_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\/)(\d+)(-)([a-zA-Z0-9_-]+$)'
       DOTNET_VERSION: '8.0.x'
-      SOLUTION_FILE_PATH: 'Ceataec.StandardizedVesselDataset.sln'
+      SOLUTION_FILE_PATH: 'src/dotnet/Ceataec.StandardizedVesselDataset.sln'
     steps:
     - uses: actions/checkout@v4
       with:

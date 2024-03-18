@@ -14,7 +14,7 @@ if [ $current_version_tag_commit != $latest_commit_id ]; then
     merged_commit_message_title=$(git log -1 --pretty=%s)
     merged_commit_message_content=$(git log -1 --pretty=%b)
     echo $merged_commit_message_content
-    python $PYTHON_SCRIPTS_PATH/version_number_generator.py -t "$merged_commit_message_content" \
+    python $PYTHON_SCRIPTS_PATH/version_number_generator.py -t "$merged_commit_message_title" \
                                                             -c "$current_version_tag" || exit 3
     echo "New version is"
     new_version_tag=$(head -n 1 new_version_file)
