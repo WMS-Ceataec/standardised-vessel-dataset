@@ -6,7 +6,7 @@ import os
 import re
 
 
-def generate_new_semver_version_number(current_version_tag: str, pr_type: str) -> str:
+def generate_new_semver_version_number(current_version_tag: str, pr_type: str, tag_prefix: str) -> str:
     """
     Generates a new SemVer version number based on the current version tag and the type of change
 
@@ -16,13 +16,15 @@ def generate_new_semver_version_number(current_version_tag: str, pr_type: str) -
         The current version tag
     pr_type : str
         The type of change
+    tag_prefix : str
+        Tag Prefix
 
     Returns
     -------
     str
         The new SemVer version number
     """
-    current_version_tag_list = current_version_tag.replace("v", "").split(".")
+    current_version_tag_list = current_version_tag.replace(tag_prefix, "").split(".")
     major = int(current_version_tag_list[0])
     minor = int(current_version_tag_list[1])
     patch = int(current_version_tag_list[2])
@@ -46,7 +48,7 @@ def generate_new_semver_version_number(current_version_tag: str, pr_type: str) -
         case _:
             print("Change type is invalid")
             raise ValueError("Change type is invalid, check that your Pull Request title is in the correct format")
-    return f"v{major}.{minor}.{patch}"
+    return f"{tag_prefix}{major}.{minor}.{patch}"
 
 
 def get_pr_type(pr_title_regex: str, pr_title: str) -> str:
@@ -85,10 +87,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Description of your program')
     parser.add_argument('-t', '--pr-title', help='Pull Request title', required=True)
     parser.add_argument('-c', '--current-version', help='Current version tag', required=True)
+    parser.add_argument('-p', '--tag-prefix', help='Tag Prefix', required=True)
     args = vars(parser.parse_args())
 
     input_pr_type = get_pr_type(os.environ['PR_TITLE_REGEX'], args['pr_title'])
-    new_version_tag = generate_new_semver_version_number(args['current_version'], input_pr_type)
+    new_version_tag = generate_new_semver_version_number(args['current_version'], input_pr_type, args['tag_prefix'])
 
     with open("new_version_file", "w", encoding="utf-8") as new_version_file:
         new_version_file.write(new_version_tag)

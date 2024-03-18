@@ -2,10 +2,10 @@ name: .NET Build Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "ci/7-add-npm-build-pipeline" ]
   pull_request:
     types: [opened, reopened,synchronize, edited]
-  workflow_call:
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -22,6 +22,7 @@ jobs:
       BRANCH_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\/)(\d+)(-)([a-zA-Z0-9_-]+$)'
       DOTNET_VERSION: '8.0.x'
       SOLUTION_FILE_PATH: 'Ceataec.StandardizedVesselDataset.sln'
+      TAG_PREFIX: 'dotnet-v'
     steps:
     - uses: actions/checkout@v4
       with:
@@ -49,9 +50,9 @@ jobs:
     #--------------TAGGING--------------
 
     - name: Tag the repository with new version
-      if: github.ref == 'refs/heads/main'
+      # if: github.ref == 'refs/heads/main'
       id: version-generator
-      run: ${{ env.SHELL_SCRIPTS_PATH }}/apply_version.sh ${GITHUB_HEAD_REF#refs/heads/}
+      run: ${{ env.SHELL_SCRIPTS_PATH }}/apply_version.sh ${GITHUB_HEAD_REF#refs/heads/} ${{ env.TAG_PREFIX }}
 
     #--------------BUILD--------------
 
@@ -94,6 +95,6 @@ jobs:
 
     #--------------GIT TAG PUSH--------------
     - name: Push git tags
-      if: github.ref == 'refs/heads/main'
+      # if: github.ref == 'refs/heads/main'
       run: |
         git push --tags || exit 4
