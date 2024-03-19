@@ -1,15 +1,15 @@
 name: .NET Build Pipeline
 
 on:
-  push:
-    branches: [ "main", "feat/10-implement-build-pipeline-for-typescript" ]
-    paths:
-      - "src/dotnet/*"
-  pull_request:
-    types: [opened, reopened, synchronize, edited]
-    paths:
-      - "src/dotnet/*"
-  workflow_dispatch:
+  # push:
+  #   branches: [ "main" ]
+  #   paths:
+  #     - "src/dotnet/*"
+  # pull_request:
+  #   types: [opened, reopened, synchronize, edited]
+  #   paths:
+  #     - "src/dotnet/*"
+  workflow_call:
 
 permissions:
   contents: write

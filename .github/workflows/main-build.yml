@@ -1,0 +1,47 @@
+name: SVD Build Pipeline
+
+on:
+  push:
+    branches: [ "main", "feat/10-implement-build-pipeline-for-typescript" ]
+    # paths:
+    #   - "src/typescript/*"
+  pull_request:
+    types: [opened, reopened, synchronize, edited]
+    # paths:
+    #   - "src/typescript/*"
+  workflow_dispatch:
+
+jobs:
+  init:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    outputs:
+      dotnet-file-changes-check: ${{ steps.file-changes-check.outputs.dotnet }}
+      typescript-file-changes-check: ${{ steps.file-changes-check.outputs.typescript }}
+    steps:
+    - uses: actions/checkout@v2
+
+    # Check for files changes at specific paths
+    - uses: dorny/paths-filter@v3
+      id: file-changes-check
+      with:
+        filters: |
+          dotnet:
+            - 'src/dotnet/**'
+          typescript:
+            - 'src/typescript/**'
+        base: 'main'
+
+  dotnet-workflow:
+    name: dotnet workflow
+    needs: [ 'init' ]
+    if: needs.init.outputs.dotnet-file-changes-check == 'true'
+    uses: ./.github/workflows/dotnet-build.yml
+    secrets: inherit
+
+  typescript-workflow:
+    name: typescript workflow
+    needs: [ 'init' ]
+    if: needs.init.outputs.typescript-file-changes-check == 'true'
+    uses: ./.github/workflows/npm-build.yml
+    secrets: inherit

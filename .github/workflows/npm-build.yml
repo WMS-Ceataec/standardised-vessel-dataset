@@ -1,15 +1,15 @@
 name: NPM Build Pipeline
 
 on:
-  push:
-    branches: [ "main", "feat/10-implement-build-pipeline-for-typescript" ]
-    paths:
-      - "src/typescript/*"
-  pull_request:
-    types: [opened, reopened, synchronize, edited]
-    paths:
-      - "src/typescript/*"
-  workflow_dispatch:
+  # push:
+  #   branches: [ "main" ]
+  #   paths:
+  #     - "src/typescript/*"
+  # pull_request:
+  #   types: [opened, reopened, synchronize, edited]
+  #   paths:
+  #     - "src/typescript/*"
+  workflow_call:
 
 permissions:
   contents: write
