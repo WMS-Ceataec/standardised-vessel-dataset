@@ -1,0 +1,103 @@
+name: .NET Build Pipeline
+
+on:
+  push:
+    branches: [ "main", "feat/10-implement-build-pipeline-for-typescript" ]
+    paths:
+      - "src/dotnet/*"
+  pull_request:
+    types: [opened, reopened, synchronize, edited]
+    paths:
+      - "src/dotnet/*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-test-and-analyze:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    env:
+      SHELL_SCRIPTS_PATH: ".github/shell_scripts"
+      PYTHON_SCRIPTS_PATH: ".github/python_scripts"
+      PR_TITLE_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\(\d+\))(!)?\:[\s](.+)'
+      BRANCH_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\/)(\d+)(-)([a-zA-Z0-9_-]+$)'
+      DOTNET_VERSION: '8.0.x'
+      SOLUTION_FILE_PATH: 'src/dotnet/Ceataec.StandardisedVesselDataset.sln'
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1000
+        fetch-tags: true
+
+    #--------------INIT--------------
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Validate Branch Name
+      if: ${{ github.event_name == 'pull_request' }}
+      run: python ${{ env.PYTHON_SCRIPTS_PATH }}/branch_checker.py -n "${GITHUB_HEAD_REF#refs/heads/}" -r "${{ env.BRANCH_REGEX }}"
+
+    - name: PR title validator
+      if: ${{ github.event_name == 'pull_request' }}
+      env:
+        PR_TITLE: '${{ github.event.pull_request.title }}'
+        PR_DESCRIPTION: ${{ github.event.pull_request.body }}
+      run: |
+        ${{ env.SHELL_SCRIPTS_PATH }}/pr_title_validate.sh ${GITHUB_HEAD_REF#refs/heads/}
+
+    #--------------TAGGING--------------
+
+    - name: Tag the repository with new version
+      if: github.ref == 'refs/heads/main'
+      id: version-generator
+      run: ${{ env.SHELL_SCRIPTS_PATH }}/apply_version.sh ${GITHUB_HEAD_REF#refs/heads/} ${{ env.TAG_PREFIX }}
+
+    #--------------BUILD--------------
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore dependencies
+      run: dotnet restore ${{ env.SOLUTION_FILE_PATH }}
+
+    #--------------TESTS--------------
+
+    - name: Build and run tests with code coverage
+      run: |
+        dotnet build ${{ env.SOLUTION_FILE_PATH }} --no-restore
+        dotnet test ${{ env.SOLUTION_FILE_PATH }} --no-restore --no-build --verbosity normal --collect:"XPlat Code Coverage"
+    
+    #--------------REPORT GENERATION--------------
+
+    - name: ReportGenerator
+      uses: danielpalme/ReportGenerator-GitHub-Action@5.2.1
+      with:
+        reports: '**/coverage.cobertura.xml'  # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
+        targetdir: 'coverage'                 # REQUIRED # The directory where the generated report should be saved.
+        reporttypes: 'HtmlInline;Cobertura'   # The output formats and scope
+        toolpath: 'reportgeneratortool' 
+
+    - name: Upload coverage results
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage-report
+        path: coverage/*
+
+    - uses: 5monkeys/cobertura-action@master
+      if: ${{ github.event_name == 'pull_request' }}
+      with:
+        path: coverage/*.xml
+        minimum_coverage: 80
+
+    #--------------GIT TAG PUSH--------------
+    - name: Push git tags
+      if: github.ref == 'refs/heads/main'
+      run: |
+        git push --tags || exit 4

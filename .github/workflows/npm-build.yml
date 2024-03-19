@@ -1,10 +1,14 @@
-name: .NET Build Pipeline
+name: NPM Build Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feat/10-implement-build-pipeline-for-typescript" ]
+    paths:
+      - "src/typescript/*"
   pull_request:
-    types: [opened, reopened,synchronize, edited]
+    types: [opened, reopened, synchronize, edited]
+    paths:
+      - "src/typescript/*"
   workflow_dispatch:
 
 permissions:
@@ -20,8 +24,9 @@ jobs:
       PYTHON_SCRIPTS_PATH: ".github/python_scripts"
       PR_TITLE_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\(\d+\))(!)?\:[\s](.+)'
       BRANCH_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\/)(\d+)(-)([a-zA-Z0-9_-]+$)'
-      DOTNET_VERSION: '8.0.x'
-      SOLUTION_FILE_PATH: 'src/dotnet/Ceataec.StandardisedVesselDataset.sln'
+      NODE_VERSION: '20.11.1'
+      NODE_WORKING_DIRECTORY: 'src/typescript'
+      TAG_PREFIX: 'typescript-v'
     steps:
     - uses: actions/checkout@v4
       with:
@@ -51,46 +56,31 @@ jobs:
     - name: Tag the repository with new version
       if: github.ref == 'refs/heads/main'
       id: version-generator
-      run: ${{ env.SHELL_SCRIPTS_PATH }}/apply_version.sh ${GITHUB_HEAD_REF#refs/heads/}
+      run: ${{ env.SHELL_SCRIPTS_PATH }}/apply_version.sh ${GITHUB_HEAD_REF#refs/heads/} ${{ env.TAG_PREFIX }}
 
     #--------------BUILD--------------
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+    - uses: actions/setup-node@v4
       with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+        node-version: ${{ env.NODE_VERSION }} 
 
     - name: Restore dependencies
-      run: dotnet restore ${{ env.SOLUTION_FILE_PATH }}
+      working-directory: ${{ env.NODE_WORKING_DIRECTORY }}
+      run: yarn install      
 
-    #--------------TESTS--------------
+    - name: Clean and build project
+      working-directory: ${{ env.NODE_WORKING_DIRECTORY }}
+      run: yarn clean && yarn build
 
-    - name: Build and run tests with code coverage
-      run: |
-        dotnet build ${{ env.SOLUTION_FILE_PATH }} --no-restore
-        dotnet test ${{ env.SOLUTION_FILE_PATH }} --no-restore --no-build --verbosity normal --collect:"XPlat Code Coverage"
-    
-    #--------------REPORT GENERATION--------------
+    #--------------UPLOAD BUILD ARTIFACTS--------------   
 
-    - name: ReportGenerator
-      uses: danielpalme/ReportGenerator-GitHub-Action@5.2.1
-      with:
-        reports: '**/coverage.cobertura.xml'  # REQUIRED # The coverage reports that should be parsed (separated by semicolon). Globbing is supported.
-        targetdir: 'coverage'                 # REQUIRED # The directory where the generated report should be saved.
-        reporttypes: 'HtmlInline;Cobertura'   # The output formats and scope
-        toolpath: 'reportgeneratortool' 
-
-    - name: Upload coverage results
+    - name: Upload Library as Artifacts
+      if: github.ref == 'refs/heads/main'
       uses: actions/upload-artifact@v2
       with:
-        name: code-coverage-report
-        path: coverage/*
-
-    - uses: 5monkeys/cobertura-action@master
-      if: ${{ github.event_name == 'pull_request' }}
-      with:
-        path: coverage/*.xml
-        minimum_coverage: 80
+        name: library-artifacts
+        path: ${{ env.NODE_WORKING_DIRECTORY }}/lib/*
+        retention-days: 30
 
     #--------------GIT TAG PUSH--------------
     - name: Push git tags
