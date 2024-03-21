@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ceataec.StandardizedVesselDataset", "src\Ceataec.StandardizedVesselDataset\Ceataec.StandardizedVesselDataset.csproj", "{339ADB00-A9B6-4254-9EA0-9DD103D5796B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ceataec.StandardisedVesselDataset", "src\Ceataec.StandardisedVesselDataset\Ceataec.StandardisedVesselDataset.csproj", "{339ADB00-A9B6-4254-9EA0-9DD103D5796B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ceataec.StandardizedVesselDataset.Tests", "tests\unit\Ceataec.StandardizedVesselDataset.Tests\Ceataec.StandardizedVesselDataset.Tests.csproj", "{A5F240B6-CCD4-4A8B-9EED-97A9582472CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ceataec.StandardisedVesselDataset.Tests", "tests\unit\Ceataec.StandardisedVesselDataset.Tests\Ceataec.StandardisedVesselDataset.Tests.csproj", "{A5F240B6-CCD4-4A8B-9EED-97A9582472CF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{B2098A62-5B5D-4D0A-B4AC-C65FC8683E90}"
 EndProject
