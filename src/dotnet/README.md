@@ -3,13 +3,13 @@
 You can install the package via NuGet Package Manager Console:
 
 ```shell
-Install-Package Ceataec.StandardisedVesselDataSet
+Install-Package StandardisedVesselDataSet
 ```
 
 Or using .NET Core CLI
 
 ```shell
-dotnet add package Ceataec.StandardisedVesselDataSet
+dotnet add package StandardisedVesselDataSet
 ```
 
 ## Usage
@@ -17,8 +17,8 @@ To get started with the library, you can use the following code snippet:
 
 ```c#
 
-using Ceataec.StandardizedVesselDataset.Exporters.Formats.XML;
-using Ceataec.StandardizedVesselDataset.Extensions;
+using Ceataec.StandardisedVesselDataset.Exporters.Formats.XML;
+using Ceataec.StandardisedVesselDataset.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SimpleExporter;
@@ -60,9 +60,9 @@ static async Task<VesselReportData> LoadVesselReportDataAsync()
     return (VesselReportData)serializer.Deserialize(reader);
 }
 
-static StandardizedVesselDataset MapToSvd(VesselReportData vesselData)
+static StandardisedVesselDataset MapToSvd(VesselReportData vesselData)
 {
-    return new StandardizedVesselDataset()
+    return new StandardisedVesselDataset()
     {
         General = new General()
         {
@@ -90,13 +90,13 @@ To provide a customizable solution, we have included an extensibility point for 
 Create your custom validator:
 
 ```csharp
-using Ceataec.StandardizedVesselDataset.Validators;
+using Ceataec.StandardisedVesselDataset.Validators;
 
-namespace Ceataec.StandardizedVesselDataset.Example
+namespace Ceataec.StandardisedVesselDataset.Example
 {
-    internal class ExtendedStandardizedVesselDatasetValidator : StandardizedVesselDatasetValidator
+    internal class ExtendedStandardisedVesselDatasetValidator : StandardisedVesselDatasetValidator
     {
-        public ExtendedStandardizedVesselDatasetValidator()
+        public ExtendedStandardisedVesselDatasetValidator()
         {
             //extend rules here
         }
@@ -108,6 +108,6 @@ Register the validator into the DI container:
 ```csharp
 //Register 
 builder.Services.AddSvd();
-builder.Services.AddCustomValidator<ExtendedStandardizedVesselDatasetValidator>();
+builder.Services.AddCustomValidator<ExtendedStandardisedVesselDatasetValidator>();
 ```
 

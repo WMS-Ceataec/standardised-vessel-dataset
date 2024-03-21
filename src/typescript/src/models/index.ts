@@ -8,7 +8,7 @@ import { Water } from './Water'
 import { FuelConsumption } from './FuelConsumption'
 import { FuelReceived } from './FuelReceived'
 import { EmissionsReporting } from './EmissionsReporting'
-import { StandardizedVesselDataset } from './StandardizedVesselDataset'
+import { StandardisedVesselDataset } from './StandardisedVesselDataset'
 
 export {
     General,
@@ -21,5 +21,5 @@ export {
     FuelConsumption,
     FuelReceived,
     EmissionsReporting,
-    StandardizedVesselDataset,
+    StandardisedVesselDataset,
 }

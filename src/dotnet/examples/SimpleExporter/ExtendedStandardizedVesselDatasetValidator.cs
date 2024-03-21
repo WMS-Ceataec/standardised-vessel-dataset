@@ -1,10 +1,10 @@
-﻿using Ceataec.StandardizedVesselDataset.Validators;
+﻿using Ceataec.StandardisedVesselDataset.Validators;
 
 namespace SimpleExporter
 {
-    internal class ExtendedStandardizedVesselDatasetValidator : StandardizedVesselDatasetValidator
+    internal class ExtendedStandardisedVesselDatasetValidator : StandardisedVesselDatasetValidator
     {
-        public ExtendedStandardizedVesselDatasetValidator()
+        public ExtendedStandardisedVesselDatasetValidator()
         {
             //extend rules here
         }
