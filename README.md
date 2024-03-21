@@ -10,17 +10,12 @@ The Maritime industry has complex ownership and management structures with vastl
 Finding common standards is key to the improved efficiency of maritime operations and the Smart Maritime Network is helping find some of these standards with their council members.
 
 
-This is an open-source library designed to wrap around and provide additional functionality related to the [Standardised Vessel Dataset for Noon Reports developed by the Smart Maritime Network](https://smartmaritimenetwork.com/standardised-vessel-dataset-for-noon-reports/). The primary purpose of this library is to typify the model, validate and export data to various output formats such as XML, CSV, or JSON.
+This is an open-source library designed to wrap around and provide additional functionality related to the [Standardised Vessel Dataset for Noon Reports developed by the Smart Maritime Network](https://smartmaritimenetwork.com/standardised-vessel-dataset-for-noon-reports/). The primary purpose of this library is to typify the model, validate and export data to various output formats such as XML, CSV, or JSON (see features table below).
 
 We will continue to grow this library over time as the SVD dataset is updated by the Smart Maritime Network and also as we develop further functionality that's useful for others.
 
 We invite everyone to contribute to this library and you can see more details below on how to contribute or get in contact with the team.
 
-## Features
-
-- Typified StandardisedVesselDataset (SVD) models
-- Validation of SVD input data
-- Export of data to XML, CSV, or JSON formats
 
 ## Installation
 
@@ -29,8 +24,16 @@ language, you can find instructions in the corresponding source directory:
 
 | Language                             | Source                                                      |
 |--------------------------------------|-------------------------------------------------------------|
-| .NET | [src/dotnet](src/dotnet)                                                  |
+| .NET Core | [src/dotnet](src/dotnet)                                                  |
 | Typescript                                 | [src/typesrcipt](src/typescript)                                                |
+
+## Features
+
+| Feature                                         | .NET Core | Typescript |
+| ----------------------------------------------- | :-------: | :--------: |
+| Typified StandardisedVesselDataset (SVD) models |     ✅     |     ✅      |
+| Validation of SVD input data                    |     ✅     |            |
+| Export of data to XML, CSV, or JSON formats     |     ✅     |            |
 
 ## Supported Output formats
 - XML
