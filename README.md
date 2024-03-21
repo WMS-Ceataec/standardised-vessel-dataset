@@ -10,7 +10,7 @@ The Maritime industry has complex ownership and management structures with vastl
 Finding common standards is key to the improved efficiency of maritime operations and the Smart Maritime Network is helping find some of these standards with their council members.
 
 
-This is an open-source .NET Core library designed to wrap around and provide additional functionality related to the [Standardised Vessel Dataset for Noon Reports developed by the Smart Maritime Network](https://smartmaritimenetwork.com/standardised-vessel-dataset-for-noon-reports/). The primary purpose of this library is to typify the model, validate and export data to various output formats such as XML, CSV, or JSON.
+This is an open-source library designed to wrap around and provide additional functionality related to the [Standardised Vessel Dataset for Noon Reports developed by the Smart Maritime Network](https://smartmaritimenetwork.com/standardised-vessel-dataset-for-noon-reports/). The primary purpose of this library is to typify the model, validate and export data to various output formats such as XML, CSV, or JSON.
 
 We will continue to grow this library over time as the SVD dataset is updated by the Smart Maritime Network and also as we develop further functionality that's useful for others.
 
