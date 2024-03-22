@@ -3,13 +3,13 @@
 You can install the package via NuGet Package Manager Console:
 
 ```shell
-Install-Package StandardisedVesselDataSet
+Install-Package Standardised.Vessel.Dataset
 ```
 
 Or using .NET Core CLI
 
 ```shell
-dotnet add package StandardisedVesselDataSet
+dotnet add package Standardised.Vessel.Dataset
 ```
 
 ## Usage
