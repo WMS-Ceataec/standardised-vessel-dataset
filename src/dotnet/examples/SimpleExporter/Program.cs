@@ -1,18 +1,18 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Ceataec.StandardizedVesselDataset.Exporters.Formats.XML;
-using Ceataec.StandardizedVesselDataset.Extensions;
+using Ceataec.StandardisedVesselDataset.Exporters.Formats.XML;
+using Ceataec.StandardisedVesselDataset.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SimpleExporter;
 using System.Xml.Serialization;
-using Ceataec.StandardizedVesselDataset.Models;
+using Ceataec.StandardisedVesselDataset.Models;
 
 var builder = Host.CreateApplicationBuilder(args);
 
 //register package DI (Dependency injection) services
 builder.Services.AddSvd();
-builder.Services.AddCustomValidator<ExtendedStandardizedVesselDatasetValidator>();
+builder.Services.AddCustomValidator<ExtendedStandardisedVesselDatasetValidator>();
 
 using var host = builder.Build();
 
@@ -45,9 +45,9 @@ static async Task<VesselReportData> LoadVesselReportDataAsync()
     return (VesselReportData)serializer.Deserialize(reader);
 }
 
-static StandardizedVesselDataset MapToSvd(VesselReportData vesselData)
+static StandardisedVesselDataset MapToSvd(VesselReportData vesselData)
 {
-    return new StandardizedVesselDataset()
+    return new StandardisedVesselDataset()
     {
         General = new General()
         {

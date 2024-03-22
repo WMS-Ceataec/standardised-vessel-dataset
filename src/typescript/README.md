@@ -3,13 +3,13 @@
 **Npm**
 
 ```bash
-npm install standardized-vessel-dataset
+npm install standardised-vessel-dataset
 ```
 
 **Yarn**
 
 ```bash
-yarn add standardized-vessel-dataset
+yarn add standardised-vessel-dataset
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ yarn add standardized-vessel-dataset
 To get started with the library, you can use the following code snippet:
 
 ```typescript
-import { General, PortAndRouteInformation } from 'standardized-vessel-dataset'
+import { General, PortAndRouteInformation } from 'standardised-vessel-dataset'
 
 function App() {
     const general: General = {
