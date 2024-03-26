@@ -1,0 +1,92 @@
+name: NPM Build Pipeline
+
+on:
+  workflow_call:
+    inputs:      
+      shell_scripts_path:
+        type: string
+        description: 'Path to shell scripts'
+        required: true
+      python_scripts_path:
+        type: string
+        description: 'Path to python scripts'
+        required: true
+      pr_title_regex:
+        type: string
+        description: 'PR Title Regex'
+        required: true
+      node_version:
+        type: string
+        description: 'Node version'
+        required: false
+        default: '20.11.1'
+      node_working_directory:
+        type: string
+        description: 'Path to the solution file'
+        required: false
+        default: 'src/typescript'
+      tag_prefix:
+        type: string
+        description: 'Tag Prefix'
+        required: false
+        default: 'typescript-'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  build-test-and-analyze-job:
+    name: Build Test and Analyze Job
+    permissions: write-all
+    runs-on: ubuntu-latest
+    env:
+      SHELL_SCRIPTS_PATH: '${{ inputs.shell_scripts_path }}'
+      PYTHON_SCRIPTS_PATH: '${{ inputs.python_scripts_path }}'
+      PR_TITLE_REGEX: '${{ inputs.pr_title_regex }}'
+      TAG_PREFIX: 'typescript-'
+      NODE_VERSION: '20.11.1'
+      NODE_WORKING_DIRECTORY: 'src/typescript'
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1000
+        fetch-tags: true
+
+    #--------------TAGGING--------------
+
+    - name: Tag the repository with new version
+      if: github.ref == 'refs/heads/main'
+      id: version-generator
+      run: ${{ env.SHELL_SCRIPTS_PATH }}/apply_version.sh ${GITHUB_HEAD_REF#refs/heads/}
+
+    #--------------BUILD--------------
+
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }} 
+
+    - name: Restore dependencies
+      working-directory: ${{ env.NODE_WORKING_DIRECTORY }}
+      run: yarn install      
+
+    - name: Clean and build project
+      working-directory: ${{ env.NODE_WORKING_DIRECTORY }}
+      run: yarn clean && yarn build
+
+    #--------------UPLOAD BUILD ARTIFACTS--------------   
+
+    - name: Upload Library as Artifacts
+      if: github.ref == 'refs/heads/main'
+      uses: actions/upload-artifact@v2
+      with:
+        name: library-artifacts
+        path: ${{ env.NODE_WORKING_DIRECTORY }}/lib/*
+        retention-days: 30
+
+    #--------------GIT TAG PUSH--------------
+    - name: Push git tags
+      if: github.ref == 'refs/heads/main'
+      run: |
+        git push --tags || exit 4

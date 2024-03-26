@@ -1,57 +1,51 @@
 name: .NET Build Pipeline
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    types: [opened, reopened,synchronize, edited]
-  workflow_dispatch:
+  workflow_call:
+    inputs:      
+      shell_scripts_path:
+        type: string
+        description: 'Path to shell scripts'
+        required: true
+      python_scripts_path:
+        type: string
+        description: 'Path to python scripts'
+        required: true
+      pr_title_regex:
+        type: string
+        description: 'PR Title Regex'
+        required: true      
 
 permissions:
   contents: write
   pull-requests: write
 
 jobs:
-  build-test-and-analyze:
+  build-test-and-analyze-job:
+    name: Build Test and Analyze Job
     permissions: write-all
     runs-on: ubuntu-latest
     env:
-      SHELL_SCRIPTS_PATH: ".github/shell_scripts"
-      PYTHON_SCRIPTS_PATH: ".github/python_scripts"
-      PR_TITLE_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\(\d+\))(!)?\:[\s](.+)'
-      BRANCH_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\/)(\d+)(-)([a-zA-Z0-9_-]+$)'
-      DOTNET_VERSION: '8.0.x'
+      SHELL_SCRIPTS_PATH: '${{ inputs.shell_scripts_path }}'
+      PYTHON_SCRIPTS_PATH: '${{ inputs.python_scripts_path }}'
+      PR_TITLE_REGEX: '${{ inputs.pr_title_regex }}'
       SOLUTION_FILE_PATH: 'src/dotnet/Ceataec.StandardisedVesselDataset.sln'
+      DOTNET_VERSION: '8.0.x'
+      TAG_PREFIX: 'dotnet-'
+
     steps:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 1000
         fetch-tags: true
 
-    #--------------INIT--------------
-
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
-
-    - name: Validate Branch Name
-      if: ${{ github.event_name == 'pull_request' }}
-      run: python ${{ env.PYTHON_SCRIPTS_PATH }}/branch_checker.py -n "${GITHUB_HEAD_REF#refs/heads/}" -r "${{ env.BRANCH_REGEX }}"
-
-    - name: PR title validator
-      if: ${{ github.event_name == 'pull_request' }}
-      env:
-        PR_TITLE: '${{ github.event.pull_request.title }}'
-        PR_DESCRIPTION: ${{ github.event.pull_request.body }}
-      run: |
-        ${{ env.SHELL_SCRIPTS_PATH }}/pr_title_validate.sh ${GITHUB_HEAD_REF#refs/heads/}
-
     #--------------TAGGING--------------
 
     - name: Tag the repository with new version
       if: github.ref == 'refs/heads/main'
       id: version-generator
-      run: ${{ env.SHELL_SCRIPTS_PATH }}/apply_version.sh ${GITHUB_HEAD_REF#refs/heads/}
+      run: |
+        ${{ env.SHELL_SCRIPTS_PATH }}/apply_version.sh ${GITHUB_HEAD_REF#refs/heads/}
 
     #--------------BUILD--------------
 

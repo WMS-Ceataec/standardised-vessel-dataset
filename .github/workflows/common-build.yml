@@ -1,0 +1,88 @@
+name: SVD Build Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    types: [ opened, reopened, synchronize, edited ]
+  workflow_dispatch:
+
+env:
+  SHELL_SCRIPTS_PATH: ".github/shell_scripts"
+  PYTHON_SCRIPTS_PATH: ".github/python_scripts"
+  PR_TITLE_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\(\d+\))(!)?\:[\s](.+)'
+  BRANCH_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\/)(\d+)(-)([a-zA-Z0-9_-]+$)'
+
+jobs:
+  common-workflow-job:
+    name: Common Workflow Job
+    permissions: write-all
+    runs-on: ubuntu-latest
+    outputs:
+      dotnet-file-changes-check: ${{ steps.file-changes-check.outputs.dotnet }}
+      typescript-file-changes-check: ${{ steps.file-changes-check.outputs.typescript }}
+      SHELL_SCRIPTS_PATH: ${{ env.SHELL_SCRIPTS_PATH }}
+      PYTHON_SCRIPTS_PATH: ${{ env.PYTHON_SCRIPTS_PATH }}
+      PR_TITLE_REGEX:  ${{ env.PR_TITLE_REGEX }}
+      BRANCH_REGEX:  ${{ env.BRANCH_REGEX }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1000
+        fetch-tags: true
+
+    #--------------INIT--------------
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Validate Branch Name
+      if: ${{ github.event_name == 'pull_request' }}
+      run: python ${{ env.PYTHON_SCRIPTS_PATH }}/branch_checker.py -n "${GITHUB_HEAD_REF#refs/heads/}" -r "${{ env.BRANCH_REGEX }}"
+
+    - name: PR title validator
+      if: ${{ github.event_name == 'pull_request' }}
+      env:
+        PR_TITLE: '${{ github.event.pull_request.title }}'
+        PR_DESCRIPTION: ${{ github.event.pull_request.body }}
+      run: |
+        ${{ env.SHELL_SCRIPTS_PATH }}/pr_title_validate.sh ${GITHUB_HEAD_REF#refs/heads/}
+
+    #--------------CHECK FILE CHANGES--------------
+
+    - uses: dorny/paths-filter@v3
+      id: file-changes-check
+      with:
+        filters: |
+          dotnet:
+            - 'src/dotnet/**'
+          typescript:
+            - 'src/typescript/**'
+        base: 'main'
+
+  #--------------DOTNET WORKFLOW--------------
+
+  dotnet-workflow-job:
+    name: Dotnet Workflow Job
+    needs: [ 'common-workflow-job' ]
+    if: needs.common-workflow-job.outputs.dotnet-file-changes-check == 'true'
+    uses: ./.github/workflows/dotnet-build.yml
+    with:
+      shell_scripts_path: ${{ needs.common-workflow-job.outputs.SHELL_SCRIPTS_PATH }}
+      python_scripts_path: ${{ needs.common-workflow-job.outputs.PYTHON_SCRIPTS_PATH }}
+      pr_title_regex: ${{ needs.common-workflow-job.outputs.PR_TITLE_REGEX }}
+    secrets: inherit
+    
+  #--------------TYPESCRIPT WORKFLOW--------------
+
+  typescript-workflow-job:
+    name: Typescript Workflow Job
+    needs: [ 'common-workflow-job' ]
+    if: needs.common-workflow-job.outputs.typescript-file-changes-check == 'true'
+    uses: ./.github/workflows/npm-build.yml
+    with:
+      shell_scripts_path: ${{ needs.common-workflow-job.outputs.SHELL_SCRIPTS_PATH }}
+      python_scripts_path: ${{ needs.common-workflow-job.outputs.PYTHON_SCRIPTS_PATH }}
+      pr_title_regex: ${{ needs.common-workflow-job.outputs.PR_TITLE_REGEX }}
+    secrets: inherit
