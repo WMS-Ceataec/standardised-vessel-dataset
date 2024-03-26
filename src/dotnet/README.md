@@ -106,10 +106,7 @@ namespace Ceataec.StandardisedVesselDataset.Example
 Register the validator into the DI container:
 
 ```csharp
-//Register 
+//Register
 builder.Services.AddSvd();
 builder.Services.AddCustomValidator<ExtendedStandardisedVesselDatasetValidator>();
 ```
-
-
-

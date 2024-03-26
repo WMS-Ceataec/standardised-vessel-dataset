@@ -14,23 +14,7 @@ on:
       pr_title_regex:
         type: string
         description: 'PR Title Regex'
-        required: true
-      dotnet_version:
-        type: string
-        description: 'The .NET version'
-        required: false
-        default: '8.0.x'
-      solution_file_path:
-        type: string
-        description: 'Path to the solution file'
-        required: false
-        default: 'src/dotnet/Ceataec.StandardizedVesselDataset.sln'
-      tag_prefix:
-        type: string
-        description: 'Tag Prefix'
-        required: false
-        default: 'dotnet-'
-      
+        required: true      
 
 permissions:
   contents: write
@@ -42,12 +26,13 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     env:
-      SHELL_SCRIPTS_PATH: ".github/shell_scripts"
-      PYTHON_SCRIPTS_PATH: ".github/python_scripts"
-      PR_TITLE_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\(\d+\))(!)?\:[\s](.+)'
-      BRANCH_REGEX: '^(feature|feat|fix|ci|docs|style|refactor|perf|test|chore)(\/)(\d+)(-)([a-zA-Z0-9_-]+$)'
-      DOTNET_VERSION: '8.0.x'
+      SHELL_SCRIPTS_PATH: '${{ inputs.shell_scripts_path }}'
+      PYTHON_SCRIPTS_PATH: '${{ inputs.python_scripts_path }}'
+      PR_TITLE_REGEX: '${{ inputs.pr_title_regex }}'
       SOLUTION_FILE_PATH: 'src/dotnet/Ceataec.StandardisedVesselDataset.sln'
+      DOTNET_VERSION: '8.0.x'
+      TAG_PREFIX: 'dotnet-'
+
     steps:
     - uses: actions/checkout@v4
       with:
@@ -67,17 +52,17 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ inputs.dotnet_version }}
+        dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Restore dependencies
-      run: dotnet restore ${{ inputs.solution_file_path }}
+      run: dotnet restore ${{ env.SOLUTION_FILE_PATH }}
 
     #--------------TESTS--------------
 
     - name: Build and run tests with code coverage
       run: |
-        dotnet build ${{ inputs.solution_file_path }} --no-restore
-        dotnet test ${{ inputs.solution_file_path }} --no-restore --no-build --verbosity normal --collect:"XPlat Code Coverage"
+        dotnet build ${{ env.SOLUTION_FILE_PATH }} --no-restore
+        dotnet test ${{ env.SOLUTION_FILE_PATH }} --no-restore --no-build --verbosity normal --collect:"XPlat Code Coverage"
     
     #--------------REPORT GENERATION--------------
 

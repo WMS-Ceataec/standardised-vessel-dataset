@@ -44,7 +44,10 @@ jobs:
       SHELL_SCRIPTS_PATH: '${{ inputs.shell_scripts_path }}'
       PYTHON_SCRIPTS_PATH: '${{ inputs.python_scripts_path }}'
       PR_TITLE_REGEX: '${{ inputs.pr_title_regex }}'
-      TAG_PREFIX: '${{ inputs.tag_prefix }}'
+      TAG_PREFIX: 'typescript-'
+      NODE_VERSION: '20.11.1'
+      NODE_WORKING_DIRECTORY: 'src/typescript'
+
     steps:
     - uses: actions/checkout@v4
       with:
@@ -62,14 +65,14 @@ jobs:
 
     - uses: actions/setup-node@v4
       with:
-        node-version: ${{ inputs.node_version }} 
+        node-version: ${{ env.NODE_VERSION }} 
 
     - name: Restore dependencies
-      working-directory: ${{ inputs.node_working_directory }}
+      working-directory: ${{ env.NODE_WORKING_DIRECTORY }}
       run: yarn install      
 
     - name: Clean and build project
-      working-directory: ${{ inputs.node_working_directory }}
+      working-directory: ${{ env.NODE_WORKING_DIRECTORY }}
       run: yarn clean && yarn build
 
     #--------------UPLOAD BUILD ARTIFACTS--------------   
@@ -79,7 +82,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: library-artifacts
-        path: ${{ inputs.node_working_directory }}/lib/*
+        path: ${{ env.NODE_WORKING_DIRECTORY }}/lib/*
         retention-days: 30
 
     #--------------GIT TAG PUSH--------------
