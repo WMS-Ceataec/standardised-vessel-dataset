@@ -32,6 +32,7 @@ jobs:
       SOLUTION_FILE_PATH: 'src/dotnet/Ceataec.StandardisedVesselDataset.sln'
       DOTNET_VERSION: '8.0.x'
       TAG_PREFIX: 'dotnet-'
+      NUGET_PACKAGE_ID: 'Standardised.Vessel.Dataset'
 
     steps:
     - uses: actions/checkout@v4
@@ -64,6 +65,17 @@ jobs:
         dotnet build ${{ env.SOLUTION_FILE_PATH }} --no-restore
         dotnet test ${{ env.SOLUTION_FILE_PATH }} --no-restore --no-build --verbosity normal --collect:"XPlat Code Coverage"
     
+    #--------------PACKAGING--------------
+
+    - name: Create NuGet Package    
+      if: github.ref == 'refs/heads/main'
+      run: |
+        dotnet pack ${{ env.SOLUTION_FILE_PATH }} \
+        --no-restore \
+        --configuration Release \
+        /p:Version=${{ env.VersionLabelClean }} \
+        --output 'src/dotnet/output'
+
     #--------------REPORT GENERATION--------------
 
     - name: ReportGenerator
@@ -91,3 +103,12 @@ jobs:
       if: github.ref == 'refs/heads/main'
       run: |
         git push --tags || exit 4
+
+    #--------------PACKAGING--------------
+
+    - name: Push NuGet Package    
+      # if: github.ref == 'refs/heads/main'
+      run: |
+        dotnet nuget push src/dotnet/output/${{ env.NUGET_PACKAGE_ID }}.${{ env.VersionLabelClean }}.nupkg \
+        --api-key ${{ secrets.OSS_CEATAEC_NUGET_ORG_SECRET }} \
+        --source ${{ vars.OSS_CEATAEC_NUGET_ORG_URL }}
