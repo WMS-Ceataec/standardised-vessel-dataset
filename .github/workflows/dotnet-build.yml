@@ -107,7 +107,7 @@ jobs:
     #--------------PACKAGING--------------
 
     - name: Push NuGet Package    
-      # if: github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/main'
       run: |
         dotnet nuget push src/dotnet/output/${{ env.NUGET_PACKAGE_ID }}.${{ env.VersionLabelClean }}.nupkg \
         --api-key ${{ secrets.OSS_CEATAEC_NUGET_ORG_SECRET }} \
