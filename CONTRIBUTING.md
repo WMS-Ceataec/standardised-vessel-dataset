@@ -21,7 +21,7 @@ We encourage contributions through pull requests (PRs). To contribute code, foll
 2. Clone the forked repository to your local machine.
 3. Create a dedicated branch. See branch naming convention below.
 4. Push your code and open a pull request, providing a brief explanation of your changes. 
-We follow the Conventional Commits specification for our PR titles. Conventional Commits provide a standardized convention for writing commit messages, making it easier to understand the history of your project and automate the versioning process.
+We follow the Conventional Commits specification for our PR titles. Conventional Commits provide a standardised convention for writing commit messages, making it easier to understand the history of your project and automate the versioning process.
 
 Here some examples of valid PR titles:
 - `feat(1): add a new epporter`

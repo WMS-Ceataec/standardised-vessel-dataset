@@ -1,8 +1,8 @@
 {
-  "name": "standardized-vessel-dataset",
+  "name": "standardised-vessel-dataset",
   "version": "1.0.0",
-  "description": "This is an open-source typescript library designed to wrap around and provide additional functionality related to the Standardized Vessel Dataset for Noon Reports developed by the Smart Maritime Network.",
-  "main": "lib/standardized-vessel-dataset.js",
+  "description": "This is an open-source typescript library designed to wrap around and provide additional functionality related to the standardised Vessel Dataset for Noon Reports developed by the Smart Maritime Network.",
+  "main": "lib/standardised-vessel-dataset.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs",

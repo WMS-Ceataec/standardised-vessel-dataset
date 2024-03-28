@@ -1,7 +1,7 @@
 ﻿namespace Ceataec.StandardisedVesselDataset.Models;
 
 /// <summary>
-/// Represents the Standardized Vessel Dataset (SVD)
+/// Represents the Standardised Vessel Dataset (SVD)
 /// See more: https://smartmaritimenetwork.com/standardised-vessel-dataset-for-noon-reports/
 /// </summary>
 public class StandardisedVesselDataset
