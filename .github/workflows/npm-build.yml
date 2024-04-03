@@ -82,11 +82,10 @@ jobs:
       if: github.ref == 'refs/heads/main'
       working-directory: ${{ env.NODE_WORKING_DIRECTORY }}
       run: |
-        sed -i 's/"name": "standardised-vessel-dataset"/"name": "@WMS-Ceataec\/standardised-vessel-dataset"/g' package.json
-        echo "//npm.pkg.github.com/:_authToken=${{ secrets.OSS_CEATAEC_NPMJS_SECRET }}" >> .npmrc
-        echo "registry=https://npm.pkg.github.com" >> .npmrc
+        echo "//${{ vars.OSS_CEATAEC_NPMJS_URL }}/:_authToken=${{ secrets.OSS_CEATAEC_NPMJS_SECRET }}" >> .npmrc
+        echo "registry=https://${{ vars.OSS_CEATAEC_NPMJS_URL }}" >> .npmrc
         yarn publish \
-          --registry=https://npm.pkg.github.com/ \
+          --registry=https://${{ vars.OSS_CEATAEC_NPMJS_URL }}/ \
           --new-version ${{ env.VersionLabelClean }} \
-          --access restricted \
+          --access public \
           --no-git-tag-version

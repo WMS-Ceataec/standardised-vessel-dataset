@@ -111,4 +111,4 @@ jobs:
       run: |
         dotnet nuget push src/dotnet/output/${{ env.NUGET_PACKAGE_ID }}.${{ env.VersionLabelClean }}.nupkg \
         --api-key ${{ secrets.OSS_CEATAEC_NUGET_ORG_SECRET }} \
-        --source ${{ vars.OSS_CEATAEC_NUGET_ORG_URL }}
+        --source https://${{ vars.OSS_CEATAEC_NUGET_ORG_URL }}
