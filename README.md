@@ -1,7 +1,8 @@
 # Standardised Vessel Dataset library 
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
-[![NuGet](https://img.shields.io/nuget/v/SmartMaritimeDataLibrary.svg)](https://www.nuget.org/packages/Ceataec.StandardisedVesselDataSet)
+[![NuGet](https://img.shields.io/nuget/v/Standardised.Vessel.Dataset)](https://www.nuget.org/packages/Standardised.Vessel.DataSet)
+[![NPM](https://img.shields.io/npm/v/standardised-vessel-dataset)](https://www.npmjs.com/package/standardised-vessel-dataset)
 
 ## Introduction
 
