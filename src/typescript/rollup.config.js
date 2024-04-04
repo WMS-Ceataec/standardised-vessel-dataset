@@ -5,7 +5,7 @@ export default [
     {
         input: 'src/index.ts',
         output: {
-            file: 'lib/standardized-vessel-dataset.js',
+            file: 'lib/standardised-vessel-dataset.js',
             format: 'cjs',
         },
         plugins: [typescript(), terser()],

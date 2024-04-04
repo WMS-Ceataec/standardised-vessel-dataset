@@ -4,6 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageId>Standardised.Vessel.Dataset</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,4 +19,8 @@
 			<_Parameter1>Ceataec.StandardisedVesselDataset.Tests</_Parameter1>
 		</AssemblyAttribute>
 	</ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md" pack="true" PackagePath="" />    
+    <None Include="..\..\..\..\LICENSE" pack="true" PackagePath="" />
+  </ItemGroup>
 </Project>

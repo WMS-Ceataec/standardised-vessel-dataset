@@ -15,21 +15,6 @@ on:
         type: string
         description: 'PR Title Regex'
         required: true
-      node_version:
-        type: string
-        description: 'Node version'
-        required: false
-        default: '20.11.1'
-      node_working_directory:
-        type: string
-        description: 'Path to the solution file'
-        required: false
-        default: 'src/typescript'
-      tag_prefix:
-        type: string
-        description: 'Tag Prefix'
-        required: false
-        default: 'typescript-'
 
 permissions:
   contents: write
@@ -90,3 +75,17 @@ jobs:
       if: github.ref == 'refs/heads/main'
       run: |
         git push --tags || exit 4
+
+    #--------------PUBLISH PACKAGE--------------
+
+    - name: Publish NPM Package      
+      if: github.ref == 'refs/heads/main'
+      working-directory: ${{ env.NODE_WORKING_DIRECTORY }}
+      run: |
+        echo "//${{ vars.OSS_CEATAEC_NPMJS_URL }}/:_authToken=${{ secrets.OSS_CEATAEC_NPMJS_SECRET }}" >> .npmrc
+        echo "registry=https://${{ vars.OSS_CEATAEC_NPMJS_URL }}" >> .npmrc
+        yarn publish \
+          --registry=https://${{ vars.OSS_CEATAEC_NPMJS_URL }}/ \
+          --new-version ${{ env.VersionLabelClean }} \
+          --access public \
+          --no-git-tag-version
