@@ -20,6 +20,7 @@ Please make sure to review and check all applicable items:
 - [ ] I have run the code formatter and linter to ensure code consistency.
 - [ ] All tests have passed successfully.
 - [ ] I have requested reviews from relevant team members.
+- [ ] I have understood if my changes are breaking changes and I have mentioned same in PR title and its description as per contribution guidelines
 
 ## Additional Notes
 [//]: # (Any additional information or context that might be helpful for reviewers. Attach screenshots if required)

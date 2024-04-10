@@ -24,11 +24,19 @@ We encourage contributions through pull requests (PRs). To contribute code, foll
 We follow the Conventional Commits specification for our PR titles. Conventional Commits provide a standardised convention for writing commit messages, making it easier to understand the history of your project and automate the versioning process.
 
 Here some examples of valid PR titles:
-- `feat(1): add a new epporter`
+- `feat(1): update the exporter`
 - `fix(1): fix issue on custom exporter`
-- `ci(1): Update the build pipeline`
+- `ci(1): update the build pipeline`
 
 For more information on Conventional Commits, refer to [Conventional Commits Specification](https://www.conventionalcommits.org/en/v1.0.0/).
+
+### Breaking Changes:
+
+Mention the breaking changes if you have made in PR title and describe same in PR description.
+
+Here some examples of valid PR titles with Breaking Changes:
+- `feat(1)!: new exporter added`
+- `fix(1)!: dependency updated`
 
 ### Branching naming convention
 
@@ -36,7 +44,7 @@ When creating branches for your contributions, please follow a clear and descrip
 
 Here some examples of valid branch naming bounded to a GitHub issue ID:
 
-- `feature/1-add a new epporter`
+- `feature/1-add a new exporter`
 - `fix/1-fix-exported-data`
 - `ci/1-update-build-pipeline`
 
