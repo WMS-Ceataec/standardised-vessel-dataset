@@ -29,7 +29,7 @@ jobs:
       SHELL_SCRIPTS_PATH: '${{ inputs.shell_scripts_path }}'
       PYTHON_SCRIPTS_PATH: '${{ inputs.python_scripts_path }}'
       PR_TITLE_REGEX: '${{ inputs.pr_title_regex }}'
-      SOLUTION_FILE_PATH: 'src/dotnet/Ceataec.StandardisedVesselDataset.sln'
+      SOLUTION_FILE_PATH: 'src/dotnet/StandardisedVesselDataset.sln'
       DOTNET_VERSION: '8.0.x'
       TAG_PREFIX: 'dotnet-'
       NUGET_PACKAGE_ID: 'Standardised.Vessel.Dataset'
