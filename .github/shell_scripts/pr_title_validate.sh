@@ -1,6 +1,8 @@
+#!/usr/bin/env bash
+set -e
 python $PYTHON_SCRIPTS_PATH/pr_title_validator.py || exit 3
 short_sha=$(git rev-parse --short HEAD)
-last_tag=$(git describe --tags --abbrev=0 --match "v[0-9]*.[0-9]*.[0-9]*")
+last_tag=$(git describe --tags --abbrev=0 --match "$TAG_PREFIX[0-9]*.[0-9]*.[0-9]*")
 commit_count_since_last_tag=$(git rev-list $last_tag..HEAD --count)
 
 # Creating Tags for Pull Request deployments
