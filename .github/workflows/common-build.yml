@@ -47,7 +47,7 @@ jobs:
         PR_TITLE: '${{ github.event.pull_request.title }}'
         PR_DESCRIPTION: ${{ github.event.pull_request.body }}
       run: |
-        ${{ env.SHELL_SCRIPTS_PATH }}/pr_title_validate.sh ${GITHUB_HEAD_REF#refs/heads/}
+        python ${{ env.PYTHON_SCRIPTS_PATH }}/pr_title_validator.py
 
     #--------------CHECK FILE CHANGES--------------
 
