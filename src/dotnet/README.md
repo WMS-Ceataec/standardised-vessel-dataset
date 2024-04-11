@@ -17,8 +17,8 @@ To get started with the library, you can use the following code snippet:
 
 ```c#
 
-using Ceataec.StandardisedVesselDataset.Exporters.Formats.XML;
-using Ceataec.StandardisedVesselDataset.Extensions;
+using StandardisedVesselDataset.Exporters.Formats.XML;
+using StandardisedVesselDataset.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SimpleExporter;
@@ -60,9 +60,9 @@ static async Task<VesselReportData> LoadVesselReportDataAsync()
     return (VesselReportData)serializer.Deserialize(reader);
 }
 
-static StandardisedVesselDataset MapToSvd(VesselReportData vesselData)
+static StandardisedVesselDataset.Models.StandardisedVesselDataset MapToSvd(VesselReportData vesselData)
 {
-    return new StandardisedVesselDataset()
+    return new StandardisedVesselDataset.Models.StandardisedVesselDataset()
     {
         General = new General()
         {
@@ -90,9 +90,9 @@ To provide a customizable solution, we have included an extensibility point for 
 Create your custom validator:
 
 ```csharp
-using Ceataec.StandardisedVesselDataset.Validators;
+using StandardisedVesselDataset.Validators;
 
-namespace Ceataec.StandardisedVesselDataset.Example
+namespace StandardisedVesselDataset.Example
 {
     internal class ExtendedStandardisedVesselDatasetValidator : StandardisedVesselDatasetValidator
     {

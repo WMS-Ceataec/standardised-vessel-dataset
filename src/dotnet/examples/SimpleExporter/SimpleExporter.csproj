@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Ceataec.StandardisedVesselDataset\Ceataec.StandardisedVesselDataset.csproj" />
+    <ProjectReference Include="..\..\src\StandardisedVesselDataset\StandardisedVesselDataset.csproj" />
   </ItemGroup>
 
   <ItemGroup>

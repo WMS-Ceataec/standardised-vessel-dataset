@@ -1,4 +1,4 @@
-﻿using Ceataec.StandardisedVesselDataset.Validators;
+﻿using StandardisedVesselDataset.Validators;
 
 namespace SimpleExporter
 {
