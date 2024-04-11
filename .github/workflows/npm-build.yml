@@ -39,16 +39,6 @@ jobs:
         fetch-depth: 1000
         fetch-tags: true
 
-    #--------------INIT--------------
-
-    - name: PR title validator
-      if: ${{ github.event_name == 'pull_request' }}
-      env:
-        PR_TITLE: '${{ github.event.pull_request.title }}'
-        PR_DESCRIPTION: ${{ github.event.pull_request.body }}
-      run: |
-        ${{ env.SHELL_SCRIPTS_PATH }}/pr_title_validate.sh ${GITHUB_HEAD_REF#refs/heads/}
-
     #--------------TAGGING--------------
 
     - name: Tag the repository with new version
