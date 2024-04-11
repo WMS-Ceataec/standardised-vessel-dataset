@@ -27,15 +27,15 @@ public static class ServiceCollectionExtensions
     /// <param name="services">The service collection</param>
     /// <returns></returns>
     public static IServiceCollection AddCustomValidator<TValidator>(this IServiceCollection services)
-      where TValidator : class, IValidator<Models.StandardisedVesselDataset>
+      where TValidator : class, IValidator<Svd>
     {
-        services.AddScoped<IValidator<Models.StandardisedVesselDataset>, TValidator>();
+        services.AddScoped<IValidator<Svd>, TValidator>();
         return services;
     }
 
     private static IServiceCollection AddValidators(this IServiceCollection services)
     {
-        services.AddScoped<IValidator<Models.StandardisedVesselDataset>, StandardisedVesselDatasetValidator>();
+        services.AddScoped<IValidator<Svd>, StandardisedVesselDatasetValidator>();
         services.AddScoped<IValidator<General>, GeneralValidator>();
 
         return services;

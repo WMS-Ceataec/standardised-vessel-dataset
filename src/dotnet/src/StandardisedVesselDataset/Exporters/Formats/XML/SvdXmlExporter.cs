@@ -9,9 +9,9 @@ namespace StandardisedVesselDataset.Exporters.Formats.XML;
 
 internal class SvdXmlExporter(IValidator<Svd> validator) : BaseExporter(validator), ISvdXmlExporter
 {
-    protected override Task<StandardisedVesselDatasetContent> InternalExportAsync(StandardisedVesselDataset.Models.StandardisedVesselDataset svd)
+    protected override Task<StandardisedVesselDatasetContent> InternalExportAsync(Svd svd)
     {
-        var xmlSerializer = new XmlSerializer(typeof(StandardisedVesselDataset.Models.StandardisedVesselDataset));
+        var xmlSerializer = new XmlSerializer(typeof(Svd));
 
         using var memoryStream = new MemoryStream();
         using (var xmlWriter = XmlWriter.Create(memoryStream, new XmlWriterSettings { Indent = true }))
