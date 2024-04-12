@@ -7,7 +7,10 @@
 [//]: # (If this pull request relates to a specific issue, please link it here)
 
 ## Changes Proposed
-[//]: # (List the changes made in this pull request, especially breaking changes)
+[//]: # (List the changes made in this pull request)
+
+## Breaking Changes
+[//]: # (Please provide a description of the breaking change if it has been made)
 
 ## Checklist
 Please make sure to review and check all applicable items:
@@ -20,7 +23,7 @@ Please make sure to review and check all applicable items:
 - [ ] I have run the code formatter and linter to ensure code consistency.
 - [ ] All tests have passed successfully.
 - [ ] I have requested reviews from relevant team members.
-- [ ] I have understood if my changes are breaking changes and I have mentioned same in PR title and its description as per contribution guidelines
+- [ ] I understand if my changes are breaking and indicated this accordingly in the PR title and description according to contribution guidelines.
 
 ## Additional Notes
 [//]: # (Any additional information or context that might be helpful for reviewers. Attach screenshots if required)

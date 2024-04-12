@@ -24,9 +24,9 @@ We encourage contributions through pull requests (PRs). To contribute code, foll
 We follow the Conventional Commits specification for our PR titles. Conventional Commits provide a standardised convention for writing commit messages, making it easier to understand the history of your project and automate the versioning process.
 
 Here some examples of valid PR titles:
-- `feat(1): update the exporter`
+- `feat(1): add new exporter`
 - `fix(1): fix issue on custom exporter`
-- `ci(1): update the build pipeline`
+- `ci(1): update dotnet build pipeline`
 
 For more information on Conventional Commits, refer to [Conventional Commits Specification](https://www.conventionalcommits.org/en/v1.0.0/).
 
@@ -35,7 +35,7 @@ For more information on Conventional Commits, refer to [Conventional Commits Spe
 Mention the breaking changes if you have made in PR title and describe same in PR description.
 
 Here some examples of valid PR titles with Breaking Changes:
-- `feat(1)!: new exporter added`
+- `feat(1)!: rename base exporter`
 - `fix(1)!: dependency updated`
 
 ### Branching naming convention
