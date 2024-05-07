@@ -18,6 +18,6 @@ internal class SvdJsonExporter(IValidator<Svd> validator) : BaseExporter(validat
         var reportData = JsonSerializer.SerializeToUtf8Bytes(svd, _options);
 
         return
-            Task.FromResult(new StandardisedVesselDatasetContent(reportData, $"SVD_{svd.General.Imo}_{svd.General.Time:yyyy-MM-dd}.json"));
+            Task.FromResult(new StandardisedVesselDatasetContent(reportData, $"SVD_{svd.General.Imo}_{svd.General.ShipReportingDate:yyyy-MM-dd}.json"));
     }
 }

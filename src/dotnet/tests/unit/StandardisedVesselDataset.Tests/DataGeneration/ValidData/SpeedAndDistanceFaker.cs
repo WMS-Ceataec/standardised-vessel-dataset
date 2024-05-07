@@ -7,8 +7,9 @@ namespace StandardisedVesselDataset.Tests.DataGeneration.ValidData
     {
         public SpeedAndDistanceFaker()
         {
-            RuleFor(sd => sd.EngineDistanceKm, f => f.Random.Number());
-            RuleFor(sd => sd.SpeedOverGroundKmh, f => f.Random.Number());
+            RuleFor(sd => sd.DistanceOverGround, f => f.Random.Number());
+            RuleFor(sd => sd.DistanceToNextPort, f => f.Random.Number());
+            RuleFor(sd => sd.SpeedOverGround, f => f.Random.Number());
         }
     }
 }

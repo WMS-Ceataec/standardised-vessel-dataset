@@ -33,8 +33,8 @@ public class SvdValidatorTests
         validationResult.IsValid.Should().BeFalse();
         validationResult.Errors.Should().NotBeNull();   
         validationResult.Errors.Count.Should().NotBe(0);
-        validationResult.Errors.Should().Contain(e => e.ErrorMessage == "IMO is required");
-        validationResult.Errors.Should().Contain(e => e.ErrorMessage == "IMO must be seven digits.");
-        validationResult.Errors.Should().Contain(e => e.ErrorMessage == "VesselName is required");
+        validationResult.Errors.Should().Contain(e => e.ErrorMessage == "Imo is required");
+        validationResult.Errors.Should().Contain(e => e.ErrorMessage == "Imo must be seven digits.");
+        validationResult.Errors.Should().Contain(e => e.ErrorMessage == "Ship Name is required");
     }
 }

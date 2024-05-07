@@ -21,7 +21,7 @@ public class ServicesCollectionExtensionsTests
         services.AddSvd();
 
         services.Should().ContainSingle(x => x.ServiceType == typeof(IValidator<Svd>) && x.ImplementationType == typeof(StandardisedVesselDatasetValidator));
-        services.Should().Contain(x => x.ServiceType == typeof(IValidator<General>) && x.ImplementationType == typeof(GeneralValidator));
+        services.Should().Contain(x => x.ServiceType == typeof(IValidator<GeneralInformation>) && x.ImplementationType == typeof(GeneralValidator));
         services.Should().Contain(x => x.ServiceType == typeof(ISvdXmlExporter) && x.ImplementationType != null && typeof(ISvdXmlExporter).IsAssignableFrom(x.ImplementationType));
         services.Should().Contain(x => x.ServiceType == typeof(ISvdCsvExporter) && x.ImplementationType != null && typeof(ISvdCsvExporter).IsAssignableFrom(x.ImplementationType));
         services.Should().Contain(x => x.ServiceType == typeof(ISvdJsonExporter) && x.ImplementationType != null && typeof(ISvdJsonExporter).IsAssignableFrom(x.ImplementationType));

@@ -6,14 +6,15 @@
 /// </summary>
 public class StandardisedVesselDataset
 {
-    public General General { get; init; }
-    public PortAndRouteInformation PortAndRouteInformation { get; init; }
+    public GeneralInformation General { get; init; }
+    public PortInformation PortAndRoute{ get; init; }
+    public ArrivalTimes ArrivalTimes { get; init; }
+    public DeviationFromPlanned DeviationFromPlanned { get; init; }
     public SpeedAndDistance SpeedAndDistance { get; init; }
-    public Weather Weather { get; init; }
-    public SeaConditions SeaConditions { get; init; }
-    public FuelRemaining FuelRemaining { get; init; }
-    public Water Water { get; init; }
-    public FuelConsumption FuelConsumption { get; init; }
-    public FuelReceived FuelReceived { get; init; }
-    public EmissionsReporting EmissionsReporting { get; init; }
+    public WeatherInformation Weather { get; init; }
+    public FreshWater FreshWater { get; init; }
+    public ElectricityConsumption ElectricityConsumption { get; init; }
+    public CargoInformation Cargo { get; init; }
+    public FuelAndBunkerInformation FuelAndBunker { get; init; }
+    public CylinderLubeOilInformation CylinderLubeOil { get; init; }
 }

@@ -1,6 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using StandardisedVesselDataset.Exporters.Formats.XML;
+﻿using StandardisedVesselDataset.Exporters.Formats.XML;
 using StandardisedVesselDataset.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -49,18 +47,18 @@ static StandardisedVesselDataset.Models.StandardisedVesselDataset MapToSvd(Vesse
 {
     return new StandardisedVesselDataset.Models.StandardisedVesselDataset()
     {
-        General = new General()
+        General = new GeneralInformation()
         {
             Imo = vesselData.VesselImo,
-            VesselName = vesselData.VesselName,
-            Time = vesselData.ReportDate,
+            ShipName = vesselData.VesselName,
+            ShipReportingDate = vesselData.ReportDate,
         },
-        PortAndRouteInformation = new PortAndRouteInformation()
+        PortAndRoute = new PortInformation()
         {
-            DeparturePort = vesselData.DeparturePort,
-            DepartureTime = vesselData.DepartureTime,
-            DestinationPort = vesselData.DestinationPort,
-            DistanceToDestinationPortKm = vesselData.DistanceToDestinationPortKm
+            DeparturePortCode = vesselData.DeparturePort,
+            DeparturePortDescription = vesselData.DeparturePortDescriptiopn,
+            ArrivalPortCode = vesselData.DestinationPort,
+            ArrivalPortDescription = vesselData.DestinationPortDescription
         }
     };
 }

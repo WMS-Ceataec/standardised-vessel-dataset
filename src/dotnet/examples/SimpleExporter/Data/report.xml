@@ -4,7 +4,7 @@
     <VesselName>Ocean King</VesselName>
     <ReportDate>2024-02-20T12:00:00Z</ReportDate>
     <DeparturePort>BCN</DeparturePort>
-    <DepartureTime>2024-02-20T12:30:00Z</DepartureTime>
+	<DeparturePortDescription>Barcelona, Spain</DeparturePortDescription>
     <DestinationPort>LIS</DestinationPort>
-    <DistanceToDestinationPortKM>1000</DistanceToDestinationPortKM>
+	<DestinationPortDescription>Lisbon, Portugal</DestinationPortDescription>
 </VesselReportData>
