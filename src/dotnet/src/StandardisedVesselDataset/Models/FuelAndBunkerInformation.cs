@@ -1,7 +1,7 @@
 ﻿namespace StandardisedVesselDataset.Models;
 
 /// <summary>
-/// Represents the Fuel and Bunker Information section of SVD.
+/// Represents the "Fuel and Bunker Information" section of SVD.
 /// </summary>
 public class FuelAndBunkerInformation
 {

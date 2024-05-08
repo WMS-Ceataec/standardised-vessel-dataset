@@ -1,7 +1,7 @@
 ﻿namespace StandardisedVesselDataset.Models;
 
 /// <summary>
-/// Represents the cargo information section of the SVD.
+/// Represents the "Cargo Information" section of the SVD.
 /// </summary>
 public class CargoInformation
 {

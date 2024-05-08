@@ -1,7 +1,7 @@
 ﻿namespace StandardisedVesselDataset.Models;
 
 /// <summary>
-/// Represent the General section of SVD
+/// Represent the "General" section of SVD
 /// </summary>
 public class GeneralInformation
 {

@@ -1,7 +1,7 @@
 ﻿namespace StandardisedVesselDataset.Models;
 
 /// <summary>
-/// Represent the Port and Route Information section of SVD
+/// Represent the "Port Information" section of SVD
 /// </summary>
 public class PortInformation
 {

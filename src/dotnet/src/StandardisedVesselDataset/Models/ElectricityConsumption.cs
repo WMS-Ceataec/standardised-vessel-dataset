@@ -1,7 +1,7 @@
 ﻿namespace StandardisedVesselDataset.Models;
 
 /// <summary>
-/// Represents the electricity consumption section of the SVD.
+/// Represents the "Electricity Consumption" section of the SVD.
 /// </summary>
 public class ElectricityConsumption
 {

@@ -1,7 +1,7 @@
 ﻿namespace StandardisedVesselDataset.Models;
 
 /// <summary>
-/// Represent the Water section of SVD
+/// Represent the "Fresh Water" section of SVD
 /// </summary>
 public class FreshWater
 {

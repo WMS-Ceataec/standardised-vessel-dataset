@@ -1,7 +1,7 @@
 ﻿namespace StandardisedVesselDataset.Models;
 
 /// <summary>
-/// Represents the arrival times section of the SVD.
+/// Represents the "Arrival Times" section of the SVD.
 /// </summary>
 public class ArrivalTimes
 {

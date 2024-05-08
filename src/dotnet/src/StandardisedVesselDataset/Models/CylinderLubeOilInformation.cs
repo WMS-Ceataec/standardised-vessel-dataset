@@ -1,7 +1,7 @@
 ﻿namespace StandardisedVesselDataset.Models;
 
 /// <summary>
-/// Represent the Cylinder Lube Oil Information section of SVD
+/// Represent the "Cylinder Lube Oil Information" section of SVD
 /// </summary>
 public class CylinderLubeOilInformation
 {

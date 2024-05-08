@@ -1,7 +1,7 @@
 ﻿namespace StandardisedVesselDataset.Models;
 
 /// <summary>
-/// Represent the Speed and Distance section of SVD
+/// Represent the "Speed and Distance" section of SVD
 /// </summary>
 public class SpeedAndDistance
 {

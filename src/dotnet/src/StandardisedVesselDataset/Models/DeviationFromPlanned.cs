@@ -1,7 +1,7 @@
 ﻿namespace StandardisedVesselDataset.Models;
 
 /// <summary>
-/// Represent the Deviation from Planned section of SVD
+/// Represent the "Deviation From Planned" section of SVD
 /// </summary>
 public class DeviationFromPlanned
 {

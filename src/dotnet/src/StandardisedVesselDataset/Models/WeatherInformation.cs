@@ -1,7 +1,7 @@
 ﻿namespace StandardisedVesselDataset.Models;
 
 /// <summary>
-/// Represent the Weather Information section of SVD
+/// Represent the "Weather Information" section of SVD
 /// </summary>
 public class WeatherInformation
 {
