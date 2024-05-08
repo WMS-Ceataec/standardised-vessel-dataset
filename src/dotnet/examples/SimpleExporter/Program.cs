@@ -31,16 +31,16 @@ static async Task ExportAsync(ISvdXmlExporter exporter)
     //Export
     var reportContent = await exporter.ExportAsync(svdData);
 
-    Console.WriteLine($"Writing file to: [{reportContent.FileName}]");
+    Console.WriteLine($"Writing file to: {reportContent.FileName}]");
     await File.WriteAllBytesAsync(reportContent.FileName, reportContent.Content);
 }
 
-static async Task<VesselReportData> LoadVesselReportDataAsync()
+static Task<VesselReportData> LoadVesselReportDataAsync()
 {
     var filePath = Path.Combine("Data", "report.xml");
     using var reader = new StreamReader(filePath);
     var serializer = new XmlSerializer(typeof(VesselReportData));
-    return (VesselReportData)serializer.Deserialize(reader);
+    return Task.FromResult((VesselReportData)serializer.Deserialize(reader));
 }
 
 static StandardisedVesselDataset.Models.StandardisedVesselDataset MapToSvd(VesselReportData vesselData)
@@ -56,7 +56,7 @@ static StandardisedVesselDataset.Models.StandardisedVesselDataset MapToSvd(Vesse
         PortAndRoute = new PortInformation()
         {
             DeparturePortCode = vesselData.DeparturePort,
-            DeparturePortDescription = vesselData.DeparturePortDescriptiopn,
+            DeparturePortDescription = vesselData.DeparturePortDescription,
             ArrivalPortCode = vesselData.DestinationPort,
             ArrivalPortDescription = vesselData.DestinationPortDescription
         }

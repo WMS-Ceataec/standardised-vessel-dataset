@@ -6,7 +6,7 @@ public class VesselReportData
     public string VesselName { get; init; }
     public DateTime ReportDate { get; init; }
     public string DeparturePort { get; init; }
-    public string DeparturePortDescriptiopn { get; init; }
+    public string DeparturePortDescription { get; init; }
     public string DestinationPort { get; init; }
     public string DestinationPortDescription { get; init; }
 }
