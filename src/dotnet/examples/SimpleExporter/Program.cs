@@ -1,6 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using StandardisedVesselDataset.Exporters.Formats.XML;
+﻿using StandardisedVesselDataset.Exporters.Formats.XML;
 using StandardisedVesselDataset.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +23,7 @@ await host.RunAsync();
 static async Task ExportAsync(ISvdXmlExporter exporter)
 {
     //Load Data
-    var vesselReportData = await LoadVesselReportDataAsync();
+    var vesselReportData = LoadVesselReportData();
 
     //Map
     var svdData = MapToSvd(vesselReportData);
@@ -33,11 +31,11 @@ static async Task ExportAsync(ISvdXmlExporter exporter)
     //Export
     var reportContent = await exporter.ExportAsync(svdData);
 
-    Console.WriteLine($"Writing file to: [{reportContent.FileName}]");
+    Console.WriteLine($"Writing file to: {reportContent.FileName}");
     await File.WriteAllBytesAsync(reportContent.FileName, reportContent.Content);
 }
 
-static async Task<VesselReportData> LoadVesselReportDataAsync()
+static VesselReportData LoadVesselReportData()
 {
     var filePath = Path.Combine("Data", "report.xml");
     using var reader = new StreamReader(filePath);
@@ -49,18 +47,18 @@ static StandardisedVesselDataset.Models.StandardisedVesselDataset MapToSvd(Vesse
 {
     return new StandardisedVesselDataset.Models.StandardisedVesselDataset()
     {
-        General = new General()
+        General = new GeneralInformation()
         {
             Imo = vesselData.VesselImo,
-            VesselName = vesselData.VesselName,
-            Time = vesselData.ReportDate,
+            ShipName = vesselData.VesselName,
+            ShipReportingDate = vesselData.ReportDate,
         },
-        PortAndRouteInformation = new PortAndRouteInformation()
+        PortAndRoute = new PortInformation()
         {
-            DeparturePort = vesselData.DeparturePort,
-            DepartureTime = vesselData.DepartureTime,
-            DestinationPort = vesselData.DestinationPort,
-            DistanceToDestinationPortKm = vesselData.DistanceToDestinationPortKm
+            DeparturePortCode = vesselData.DeparturePort,
+            DeparturePortDescription = vesselData.DeparturePortDescription,
+            ArrivalPortCode = vesselData.DestinationPort,
+            ArrivalPortDescription = vesselData.DestinationPortDescription
         }
     };
 }

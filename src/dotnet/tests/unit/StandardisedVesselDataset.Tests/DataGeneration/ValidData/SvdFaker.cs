@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using StandardisedVesselDataset.Models;
 using Svd = StandardisedVesselDataset.Models.StandardisedVesselDataset;
 
 namespace StandardisedVesselDataset.Tests.DataGeneration.ValidData;
@@ -8,15 +9,16 @@ internal sealed class SvdFaker : Faker<Svd>
     internal SvdFaker()
     {
         RuleFor(e => e.General, _ => new GeneralFaker().Generate());
-        RuleFor(e => e.PortAndRouteInformation, _ => new PortAndRouteInformationFaker().Generate());
+        RuleFor(e => e.PortAndRoute, _ => new PortInformationFaker().Generate());
+        RuleFor(e => e.ArrivalTimes, _ => new ArrivalTimesFaker().Generate());
+        RuleFor(e => e.DeviationFromPlanned, _ => new DeviationFromPlannedFaker().Generate());
         RuleFor(e => e.SpeedAndDistance, _ => new SpeedAndDistanceFaker().Generate());
         RuleFor(e => e.Weather, _ => new WeatherFaker().Generate());
-        RuleFor(e => e.SeaConditions, _ => new SeaConditionsFaker().Generate());
-        RuleFor(e => e.FuelRemaining, _ => new FuelRemainingFaker().Generate());
-        RuleFor(e => e.FuelConsumption, _ => new FuelConsumptionFaker().Generate());
-        RuleFor(e => e.Water, _ => new WaterFaker().Generate());
-        RuleFor(e => e.EmissionsReporting, _ => new EmissionsReportingFaker().Generate());
-        RuleFor(e => e.FuelReceived, _ => new FuelReceivedFaker().Generate());
+        RuleFor(e => e.FreshWater, _ => new FreshWaterFaker().Generate());
+        RuleFor(e => e.ElectricityConsumption, _ => new ElectricityConsumptionFaker().Generate());
+        RuleFor(e => e.Cargo, _ => new CargoInformationFaker().Generate());
+        RuleFor(e => e.FuelAndBunker, _ => new FuelAndBunkerFaker().Generate());
+        RuleFor(e => e.CylinderLubeOil, _ => new CylinderLubeOilFaker().Generate());
     }
 
 }

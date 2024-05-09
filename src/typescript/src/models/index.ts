@@ -1,25 +1,27 @@
-import { General } from './General'
-import { PortAndRouteInformation } from './PortAndRouteInformation'
+import { GeneralInformation } from './GeneralInformation'
+import { PortInformation } from './PortInformation'
+import { ArrivalTimes } from './ArrivalTimes'
 import { SpeedAndDistance } from './SpeedAndDistance'
-import { Weather } from './Weather'
-import { SeaConditions } from './SeaConditions'
-import { FuelRemaining } from './FuelRemaining'
-import { Water } from './Water'
-import { FuelConsumption } from './FuelConsumption'
-import { FuelReceived } from './FuelReceived'
-import { EmissionsReporting } from './EmissionsReporting'
+import { WeatherInformation } from './WeatherInformation'
+import { ElectricityConsumption } from './ElectricityConsumption'
 import { StandardisedVesselDataset } from './StandardisedVesselDataset'
+import { DeviationFromPlanned } from './DeviationFromPlanned'
+import { FreshWater } from './FreshWater'
+import { CargoInformation } from './CargoInformation'
+import { CylinderLubeOilInformation } from './CylinderLubeOilInformation'
+import { FuelAndBunkerInformation } from './FuelAndBunkerInformation'
 
 export {
-    General,
-    PortAndRouteInformation,
+    GeneralInformation,
+    PortInformation,
+    ArrivalTimes,
+    DeviationFromPlanned,
     SpeedAndDistance,
-    Weather,
-    SeaConditions,
-    FuelRemaining,
-    Water,
-    FuelConsumption,
-    FuelReceived,
-    EmissionsReporting,
+    WeatherInformation,
+    FreshWater,
+    CargoInformation,
+    ElectricityConsumption,
+    CylinderLubeOilInformation,
+    FuelAndBunkerInformation,
     StandardisedVesselDataset,
 }

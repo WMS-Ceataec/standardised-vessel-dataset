@@ -36,7 +36,7 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddValidators(this IServiceCollection services)
     {
         services.AddScoped<IValidator<Svd>, StandardisedVesselDatasetValidator>();
-        services.AddScoped<IValidator<General>, GeneralValidator>();
+        services.AddScoped<IValidator<GeneralInformation>, GeneralValidator>();
 
         return services;
     }

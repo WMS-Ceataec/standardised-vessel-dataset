@@ -26,6 +26,6 @@ internal class SvdCsvExporter(IValidator<Svd> validator) : BaseExporter(validato
 
         return
            Task.FromResult(new StandardisedVesselDatasetContent(Encoding.UTF8.GetBytes(csvExport.ToString()),
-           $"SVD_{svd.General.Imo}_{svd.General.Time:yyyy-MM-dd}.csv"));
+           $"SVD_{svd.General.Imo}_{svd.General.ShipReportingDate:yyyy-MM-dd}.csv"));
     }
 }

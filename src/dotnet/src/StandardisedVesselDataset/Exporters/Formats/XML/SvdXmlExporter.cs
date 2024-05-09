@@ -20,6 +20,6 @@ internal class SvdXmlExporter(IValidator<Svd> validator) : BaseExporter(validato
         }
 
         return
-            Task.FromResult(new StandardisedVesselDatasetContent(memoryStream.ToArray(), $"SVD_{svd.General.Imo}_{svd.General.Time:yyyy-MM-dd}.xml"));
+            Task.FromResult(new StandardisedVesselDatasetContent(memoryStream.ToArray(), $"SVD_{svd.General.Imo}_{svd.General.ShipReportingDate:yyyy-MM-dd}.xml"));
     }
 }
