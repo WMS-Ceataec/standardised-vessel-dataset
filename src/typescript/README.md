@@ -17,34 +17,27 @@ yarn add standardised-vessel-dataset
 To get started with the library, you can use the following code snippet:
 
 ```typescript
-import { General, PortAndRouteInformation } from 'standardised-vessel-dataset'
+import { GeneralInformation, PortInformation } from 'standardised-vessel-dataset'
 
 function App() {
-    const general: General = {
-        Position: 'Position',
-        Time: new Date('2024-03-04T10:00:00Z'),
-        VesselName: 'MV Example',
+    const general: GeneralInformation = {
+        EventType: 'Noon Report'
+        OperationType: 'Sailing',
+        ShipReportingDate: new Date('2024-03-04T10:00:00Z'),
+        ShipName: 'Ship name',
         Imo: '1234567',
         ShipType: 'Container Ship',
         VoyageNumber: 'Voy123',
-        Leg: 'Leg1',
-        Remarks: 'Some remarks about the vessel',
+        VoyageLegIdentifier: 'Leg1',
+        VoyageLegRemarks: 'Some remarks about the vessel',
     }
 
-    const portInfo: PortAndRouteInformation = {
-        DeparturePort: 'Port A',
-        DepartureTime: new Date('2024-03-01T08:00:00Z'),
-        DestinationPort: 'Port B',
-        Etapbp: new Date('2024-03-05T12:00:00Z'),
-        EtaBerth: new Date('2024-03-05T14:00:00Z'),
-        Etavts: new Date('2024-03-06T08:00:00Z'),
-        DistanceToNextWaypointNm: 100,
-        DistanceToNextWaypointKm: 185.2,
-        DistanceToDestinationPortNm: 500,
-        DistanceToDestinationPortKm: 926,
-        ProjectedSpeedKn: 15,
-        ProjectedSpeedKmh: 27.78,
-        VoyageTimeMs: 259200000, // 3 days in milliseconds
+    const portInfo: PortInformation = {
+        DeparturePortCode: 'BCN',
+        DeparturePortDescription: 'Barcelona, Spain',
+        ArrivalPortCode: 'LIS',
+        ArrivalPortDescription: 'Lisbon, Portugal'
+        DepartureDateTime: new Date('2024-03-05T12:00:00Z')
     }
 }
 ```
