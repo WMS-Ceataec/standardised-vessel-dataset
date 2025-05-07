@@ -9,7 +9,7 @@ internal sealed class PortInformationFaker : Faker<PortInformation>
     {
         RuleFor(e => e.DeparturePortCode, f => f.Address.CityPrefix());
         RuleFor(e => e.ArrivalPortCode, f => f.Address.CityPrefix());
-        RuleFor(e => e.DeparturePortDescription, f => f.Address.City());
-        RuleFor(e => e.ArrivalPortDescription, f => f.Address.City());
+        RuleFor(e => e.ArrivalPortName, f => f.Address.City());
+        RuleFor(e => e.DeparturePortName, f => f.Address.City());
     }
 }

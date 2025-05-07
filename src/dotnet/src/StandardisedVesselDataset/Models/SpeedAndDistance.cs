@@ -31,6 +31,16 @@ public class SpeedAndDistance
     public double DistanceToNextWaypoint { get; init; }
 
     /// <summary>
+    /// Total distance, over ground, from port to port, measured in nautical miles.
+    /// </summary>
+    public double TotalDistanceOnSeaPassage { get; init; }
+
+    /// <summary>
+    /// The distance which must be excluded for reporting correction, over ground distance measured in nautical miles.
+    /// </summary>
+    public double DistanceExcluded { get; init; }
+
+    /// <summary>
     /// Ship's current speed over ground, measured in knots.
     /// </summary>
     public double SpeedOverGround { get; init; }
@@ -68,7 +78,7 @@ public class SpeedAndDistance
     /// <summary>
     /// Direction in which the ship is pointing with respect to true north, expressed in degrees.
     /// </summary>
-    public double ShipHeading { get; init; }
+    public double ShipTrueHeading { get; init; }
 
     /// <summary>
     /// Maximum ship present static draught in metres and centimetres.
@@ -91,7 +101,17 @@ public class SpeedAndDistance
     public double ShipActualDeadweightTonnage { get; init; }
 
     /// <summary>
-    /// Total physical measurement of ballast water on board including sediments measured in cubic metres (m3).
+    /// The difference in tonnes between the displacement of a ship in water of a specific gravity of 1.025 at the maximum draught and the lightweight of the ship.
+    /// </summary>
+    public double ShipMaximumDeadweight { get; init; }
+
+    /// <summary>
+    /// Indicates whether the ship is laden at the time of reporting (“yes” or “no”).
+    /// </summary>
+    public bool LadenIndicator { get; init; }
+
+    /// <summary>
+    /// Total physical measurement of ballast water on board including sediments measured in cubic metres (m³).
     /// </summary>
     public double TotalBallastWaterOnboard { get; init; }
 }

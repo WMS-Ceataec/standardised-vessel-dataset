@@ -7,7 +7,7 @@ public class ArrivalTimesFaker : Faker<ArrivalTimes>
 {
     internal ArrivalTimesFaker()
     {
-        RuleFor(a => a.Actual, f => f.Date.Soon());
-        RuleFor(a => a.Eta, f => f.Date.Future());
+        RuleFor(a => a.Arrival, f => f.Date.Future());
+        RuleFor(a => a.Departure, f => f.Date.Soon());
     }
 }
