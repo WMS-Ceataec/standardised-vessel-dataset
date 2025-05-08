@@ -58,7 +58,7 @@ public class WeatherInformation
     /// <summary>
     /// Code indicating the state of the sea by significant wave height.
     /// </summary>
-    public string StateOfSea{ get; init; }
+    public string StateOfSea { get; init; }
 
     /// <summary>
     /// Best estimate of the direction of sea relative to the ship, in degrees, made by the seafarer on board.
