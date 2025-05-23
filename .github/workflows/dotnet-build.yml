@@ -87,7 +87,7 @@ jobs:
         toolpath: 'reportgeneratortool' 
 
     - name: Upload coverage results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: code-coverage-report
         path: coverage/*

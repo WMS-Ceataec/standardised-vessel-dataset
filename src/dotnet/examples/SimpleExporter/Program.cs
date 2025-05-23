@@ -56,9 +56,9 @@ static StandardisedVesselDataset.Models.StandardisedVesselDataset MapToSvd(Vesse
         PortAndRoute = new PortInformation()
         {
             DeparturePortCode = vesselData.DeparturePort,
-            DeparturePortDescription = vesselData.DeparturePortDescription,
+            DeparturePortName = vesselData.DeparturePortDescription,
             ArrivalPortCode = vesselData.DestinationPort,
-            ArrivalPortDescription = vesselData.DestinationPortDescription
+            ArrivalPortName = vesselData.DestinationPortDescription
         }
     };
 }

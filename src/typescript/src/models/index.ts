@@ -10,6 +10,7 @@ import { FreshWater } from './FreshWater'
 import { CargoInformation } from './CargoInformation'
 import { CylinderLubeOilInformation } from './CylinderLubeOilInformation'
 import { FuelAndBunkerInformation } from './FuelAndBunkerInformation'
+import { Emissions } from './Emissions'
 
 export {
     GeneralInformation,
@@ -23,5 +24,6 @@ export {
     ElectricityConsumption,
     CylinderLubeOilInformation,
     FuelAndBunkerInformation,
+    Emissions,
     StandardisedVesselDataset,
 }

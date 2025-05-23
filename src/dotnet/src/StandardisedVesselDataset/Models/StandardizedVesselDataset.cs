@@ -16,5 +16,6 @@ public class StandardisedVesselDataset
     public ElectricityConsumption ElectricityConsumption { get; init; }
     public CargoInformation Cargo { get; init; }
     public FuelAndBunkerInformation FuelAndBunker { get; init; }
+    public Emissions Emissions { get; init; }
     public CylinderLubeOilInformation CylinderLubeOil { get; init; }
 }

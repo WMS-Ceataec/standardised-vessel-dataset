@@ -18,6 +18,7 @@ internal sealed class SvdFaker : Faker<Svd>
         RuleFor(e => e.ElectricityConsumption, _ => new ElectricityConsumptionFaker().Generate());
         RuleFor(e => e.Cargo, _ => new CargoInformationFaker().Generate());
         RuleFor(e => e.FuelAndBunker, _ => new FuelAndBunkerFaker().Generate());
+        RuleFor(e => e.Emissions, _ => new EmissionsFaker().Generate());
         RuleFor(e => e.CylinderLubeOil, _ => new CylinderLubeOilFaker().Generate());
     }
 
