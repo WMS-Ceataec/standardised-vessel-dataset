@@ -3,6 +3,7 @@ import { CargoInformation } from './CargoInformation'
 import { CylinderLubeOilInformation } from './CylinderLubeOilInformation'
 import { DeviationFromPlanned } from './DeviationFromPlanned'
 import { ElectricityConsumption } from './ElectricityConsumption'
+import { Emissions } from './Emissions'
 import { FreshWater } from './FreshWater'
 import { FuelAndBunkerInformation } from './FuelAndBunkerInformation'
 import { GeneralInformation } from './GeneralInformation'
@@ -25,5 +26,6 @@ export type StandardisedVesselDataset = {
     Cargo: CargoInformation,
     ElectricityConsumption: ElectricityConsumption,
     FuelAndBunker: FuelAndBunkerInformation,
+    Emissions: Emissions
     CylinderLubeOil : CylinderLubeOilInformation
 }
