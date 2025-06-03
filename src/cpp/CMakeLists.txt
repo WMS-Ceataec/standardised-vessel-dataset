@@ -39,7 +39,7 @@ FetchContent_MakeAvailable(tinyxml2)
 FetchContent_Declare(
     fast-cpp-csv-parser
     GIT_REPOSITORY https://github.com/ben-strasser/fast-cpp-csv-parser.git
-    GIT_TAG master
+    GIT_TAG 574a9fe4d323ba63416877a4a5fe59088d37aa34
 )
 FetchContent_MakeAvailable(fast-cpp-csv-parser)
 
