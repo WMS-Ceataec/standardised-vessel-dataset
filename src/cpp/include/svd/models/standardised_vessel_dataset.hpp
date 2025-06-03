@@ -25,7 +25,7 @@ class StandardisedVesselDataset
 {
 public:
     StandardisedVesselDataset();
-    ~StandardisedVesselDataset();
+    ~StandardisedVesselDataset() = default;  // Use RAII
     
     // Copy and move constructors/assignment operators
     StandardisedVesselDataset(const StandardisedVesselDataset&);
