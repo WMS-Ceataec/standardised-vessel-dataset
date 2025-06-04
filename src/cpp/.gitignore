@@ -1,0 +1,70 @@
+# Build directories
+build/
+cmake-build-*/
+out/
+
+# Generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+!*.cmake.in
+
+# Compiled libraries
+*.so
+*.so.*
+*.dylib
+*.dll
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Debug files
+*.pdb
+*.ilk
+
+# Visual Studio / Visual Studio Code
+.vs/
+.vscode/
+*.vcxproj*
+*.sln
+*.user
+
+# CLion
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Package manager files
+conaninfo.txt
+conanbuildinfo.cmake
+conandata.yml
+
+# Test results
+Testing/
+CTestTestfile.cmake
+
+# Documentation
+docs/html/
+docs/latex/
+docs/xml/
+
+# Dependencies (if using vcpkg or similar)
+vcpkg_installed/
+packages/
+
+# Log files
+*.log

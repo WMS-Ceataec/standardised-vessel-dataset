@@ -3,6 +3,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![NuGet](https://img.shields.io/nuget/v/Standardised.Vessel.Dataset)](https://www.nuget.org/packages/Standardised.Vessel.DataSet)
 [![NPM](https://img.shields.io/npm/v/standardised-vessel-dataset)](https://www.npmjs.com/package/standardised-vessel-dataset)
+[![C++](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](src/cpp)
 
 ## Introduction
 
@@ -17,6 +18,14 @@ We will continue to grow this library over time as the SVD dataset is updated by
 
 We invite everyone to contribute to this library and you can see more details below on how to contribute or get in contact with the team.
 
+## Language Support
+
+This library provides implementations in multiple programming languages to support diverse development environments:
+
+- **C++20**: Modern C++ implementation with comprehensive testing, smart pointer memory management, and cross-platform CMake build system
+- **.NET Core**: Full-featured .NET implementation with extensive validation and export capabilities  
+- **TypeScript**: Type-safe JavaScript implementation for web and Node.js environments
+
 
 ## Installation
 
@@ -25,16 +34,17 @@ language, you can find instructions in the corresponding source directory:
 
 | Language                             | Source                                                      |
 |--------------------------------------|-------------------------------------------------------------|
-| .NET Core | [src/dotnet](src/dotnet)                                                  |
-| Typescript                                 | [src/typesrcipt](src/typescript)                                                |
+| C++                                  | [src/cpp](src/cpp)                                         |
+| .NET Core                            | [src/dotnet](src/dotnet)                                   |
+| TypeScript                           | [src/typescript](src/typescript)                           |
 
 ## Features
 
-| Feature                                         | .NET Core | Typescript |
-| ----------------------------------------------- | :-------: | :--------: |
-| Typified StandardisedVesselDataset (SVD) models |     ✅     |     ✅      |
-| Validation of SVD input data                    |     ✅     |            |
-| Export of data to XML, CSV, or JSON formats     |     ✅     |            |
+| Feature                                         | C++       | .NET Core | TypeScript |
+| ----------------------------------------------- | :-------: | :-------: | :---------: |
+| Typified StandardisedVesselDataset (SVD) models |     ✅     |     ✅     |     ✅      |
+| Validation of SVD input data                    |     ✅     |     ✅     |            |
+| Export of data to XML, CSV, or JSON formats     |     ✅     |     ✅     |            |
 
 ## Supported Output formats
 - XML
