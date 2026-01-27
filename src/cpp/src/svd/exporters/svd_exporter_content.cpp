@@ -1,3 +1,4 @@
+#include <cstdint>
 #include "svd/exporters/svd_exporter_content.hpp"
 
 namespace svd::exporters {
