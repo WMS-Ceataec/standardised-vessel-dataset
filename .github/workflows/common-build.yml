@@ -21,6 +21,7 @@ jobs:
     outputs:
       dotnet-file-changes-check: ${{ steps.file-changes-check.outputs.dotnet }}
       typescript-file-changes-check: ${{ steps.file-changes-check.outputs.typescript }}
+      cpp-file-changes-check: ${{ steps.file-changes-check.outputs.cpp }}
       SHELL_SCRIPTS_PATH: ${{ env.SHELL_SCRIPTS_PATH }}
       PYTHON_SCRIPTS_PATH: ${{ env.PYTHON_SCRIPTS_PATH }}
       PR_TITLE_REGEX:  ${{ env.PR_TITLE_REGEX }}
@@ -59,6 +60,8 @@ jobs:
             - 'src/dotnet/**'
           typescript:
             - 'src/typescript/**'
+          cpp:
+            - 'src/cpp/**'
         base: 'main'
 
   #--------------DOTNET WORKFLOW--------------
@@ -81,6 +84,19 @@ jobs:
     needs: [ 'common-workflow-job' ]
     if: needs.common-workflow-job.outputs.typescript-file-changes-check == 'true'
     uses: ./.github/workflows/npm-build.yml
+    with:
+      shell_scripts_path: ${{ needs.common-workflow-job.outputs.SHELL_SCRIPTS_PATH }}
+      python_scripts_path: ${{ needs.common-workflow-job.outputs.PYTHON_SCRIPTS_PATH }}
+      pr_title_regex: ${{ needs.common-workflow-job.outputs.PR_TITLE_REGEX }}
+    secrets: inherit
+
+  #--------------CPP WORKFLOW--------------
+
+  cpp-workflow-job:
+    name: C++ Workflow Job
+    needs: [ 'common-workflow-job' ]
+    if: needs.common-workflow-job.outputs.cpp-file-changes-check == 'true'
+    uses: ./.github/workflows/cpp-build.yml
     with:
       shell_scripts_path: ${{ needs.common-workflow-job.outputs.SHELL_SCRIPTS_PATH }}
       python_scripts_path: ${{ needs.common-workflow-job.outputs.PYTHON_SCRIPTS_PATH }}
